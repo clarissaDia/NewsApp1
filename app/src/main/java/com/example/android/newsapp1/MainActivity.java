@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,11 +21,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     public static final String LOG_TAG = MainActivity.class.getName();
+    private final String NEWS_URL= "https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test";
     private NewsAdapter mAdapter;
     private static final int NEWS_LOADER_ID = 1;
     private TextView EmptyStateTextView;
-
-    private final String NEWS_URL= "https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter = new NewsAdapter(this, new ArrayList<News>());
         newsListView.setAdapter(mAdapter);
 
-
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 News currentNews = mAdapter.getItem(position);
-                Uri earthquakeUri = Uri.parse(currentNews.getUrl());
-                Intent websIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                Uri newsUri = Uri.parse(currentNews.getUrl());
+                Intent websIntent = new Intent(Intent.ACTION_VIEW, newsUri);
                 startActivity(websIntent);
             }
         });
@@ -68,13 +67,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> newsList) {
+        View loadingIndicator = findViewById(R.id.loading);
+        loadingIndicator.setVisibility(View.GONE);
         mAdapter.clear();
 
+        if (newsList != null && !newsList.isEmpty()){
+            mAdapter.addAll(newsList);
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         mAdapter.clear();
-
     }
 }

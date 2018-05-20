@@ -2,7 +2,7 @@ package com.example.android.newsapp1;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.content.Loader;
+
 
 import java.util.List;
 
@@ -31,4 +31,3 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     }
 }
-

@@ -25,7 +25,6 @@ public final class QueryUtils {
 
 private QueryUtils () {
 }
-
     public static List<News> fetchNewsData (String requestUrl){
         URL url = createUrl(requestUrl);
         String jsonResponse = null;
@@ -42,36 +41,29 @@ private QueryUtils () {
         if (TextUtils.isEmpty(newsJSON)){
             return null;
         }
-
-        List<News> news = new ArrayList();
+        List<News> news = new ArrayList<News>();
 
         try {
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
-            JSONArray newsArray = baseJsonResponse.getJSONArray("results");
+            JSONObject responseObject = baseJsonResponse.getJSONObject("response");
+            JSONArray newsArray = responseObject.getJSONArray("results");
 
-            for (int i = 0; i < newsArray.length(); i++) {
+            for (int i = 0; i <newsArray.length(); i++) {
                 JSONObject currentNews = newsArray.getJSONObject(i);
                 String section = currentNews.getString("sectionId");
-                String sectionName = currentNews.getString("SectionName");
                 String date = currentNews.getString("webPublicationDate");
                 String title = currentNews.getString("webTitle");
                 String url = currentNews.getString("webUrl");
 
-                News books = new News (section, sectionName, date, title,
+                News books = new News (section, date, title,
                         url);
                 news.add(books);
         }
         }catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the news JSON results", e);
         }
-
-        // Return the list of earthquakes
         return news;
 }
-
     private static URL createUrl (String stringUrl){
         URL url = null;
         try {
@@ -103,7 +95,7 @@ private QueryUtils () {
             }
 
         }catch (IOException e){
-            Log.e(LOG_TAG,"Problem retrieving the earthquake JSON results", e);
+            Log.e(LOG_TAG,"Problem retrieving the news JSON results", e);
         }finally {
             if(urlConnection!= null){
                 urlConnection.disconnect();
@@ -129,5 +121,3 @@ private QueryUtils () {
         return output.toString();
     }
 }
-
-

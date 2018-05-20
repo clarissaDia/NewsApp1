@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class NewsAdapter extends ArrayAdapter<News> {
     public NewsAdapter (Context context,List<News> newsList){
@@ -26,35 +28,31 @@ public class NewsAdapter extends ArrayAdapter<News> {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.news_item, parent, false);
         }
-
         News currentNews = getItem(position);
         TextView sectionTextView = (TextView) listItemView.findViewById(R.id.section);
         String newsSection = currentNews.getNewsSection();
         sectionTextView.setText(newsSection);
 
-        TextView sectionNameTextView = (TextView) listItemView.findViewById(R.id.section_name);
-        String sectionName = currentNews.getSectionName();
-        sectionNameTextView.setText(sectionName);
-
-        Date dateObject = new Date (currentNews.getNewsDate());
-
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
-        String formattedDate = formatDate (dateObject);
-        dateView.setText(formattedDate);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.ENGLISH);
+        try {
+            Date date = dateFormat.parse(currentNews.getNewsDate());
+
+            String parsedaDate = dateFormat2.format(date);
+            dateView.setText(parsedaDate);
+        } catch (ParseException e) {
+        }
 
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.title);
         String newsTitle = currentNews.getTitle();
         titleTextView.setText(newsTitle);
-
         return listItemView;
     }
 
     private String formatDate (Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
         return dateFormat.format(dateObject);
-    }
-    private String formatTime (Date dateObject) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        return timeFormat.format(dateObject);
     }
 }
