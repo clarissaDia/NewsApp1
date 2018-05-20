@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<List<News>> loader, List<News> newsList) {
         View loadingIndicator = findViewById(R.id.loading);
         loadingIndicator.setVisibility(View.GONE);
+        EmptyStateTextView.setText(R.string.no_news);
         mAdapter.clear();
 
         if (newsList != null && !newsList.isEmpty()){
