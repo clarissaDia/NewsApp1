@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class NewsAdapter extends ArrayAdapter<News> {
-    public NewsAdapter (Context context,List<News> newsList){
+    public NewsAdapter(Context context, List<News> newsList) {
         super(context, 0, newsList);
     }
 
@@ -48,11 +48,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.title);
         String newsTitle = currentNews.getTitle();
         titleTextView.setText(newsTitle);
-        return listItemView;
-    }
 
-    private String formatDate (Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
-        return dateFormat.format(dateObject);
+        TextView authorTextView = (TextView) listItemView.findViewById(R.id.author);
+        String newsAuthor = currentNews.getAuthor();
+        authorTextView.setText(newsAuthor);
+        return listItemView;
     }
 }

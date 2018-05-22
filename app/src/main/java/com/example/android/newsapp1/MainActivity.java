@@ -21,7 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     public static final String LOG_TAG = MainActivity.class.getName();
-    private final String NEWS_URL= "https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test";
+    private final String NEWS_URL = "https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test";
     private NewsAdapter mAdapter;
     private static final int NEWS_LOADER_ID = 1;
     private TextView EmptyStateTextView;
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = conMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()){
+        if (networkInfo != null && networkInfo.isConnected()) {
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
-        }else {
+        } else {
             View loadingIndicator = findViewById(R.id.loading);
             loadingIndicator.setVisibility(View.GONE);
             EmptyStateTextView.setText(R.string.no_connection);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        return new NewsLoader(this,NEWS_URL );
+        return new NewsLoader(this, NEWS_URL);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         EmptyStateTextView.setText(R.string.no_news);
         mAdapter.clear();
 
-        if (newsList != null && !newsList.isEmpty()){
+        if (newsList != null && !newsList.isEmpty()) {
             mAdapter.addAll(newsList);
         }
     }
