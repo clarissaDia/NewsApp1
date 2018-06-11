@@ -23,8 +23,8 @@ public class NewsSettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
-           bindPreferenceSummaryToValuue(orderBy);
+            Preference orderBy = findPreference(getString(R.string.date_list_key));
+           bindPreferenceSummaryToValue(orderBy);
         }
 
 
@@ -45,11 +45,12 @@ public class NewsSettingsActivity extends AppCompatActivity {
             return true;
         }
 
-        private void bindPreferenceSummaryToValuue (Preference preference) {
+        private void bindPreferenceSummaryToValue (Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
-            String prefernceString = preferences.getString(preference.getKey(),"");
-            onPreferenceChange(preference, prefernceString);
+            String preferenceString = preferences.getString(preference.getKey(),"");
+            onPreferenceChange(preference,preferenceString);
+
         }
     }
 }

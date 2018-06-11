@@ -25,7 +25,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     public static final String LOG_TAG = MainActivity.class.getName();
-    private final String NEWS_URL = "https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test";
+    private static final String NEWS_URL = "https://content.guardianapis.com/search?show-fields=byline&section=books";
+    private static final String QUERY_SECTION_VALUE = "section=books";
+    private static final String QUERY_DATE_VALUE = "webPublicationDate";
+    private static final String QUERY_CONTRIBUTOR_VALUE ="byline";
+    private static final String API_KEY_VALUE = "9089f21a-bc83-4c36-a079-dd9bdb460a49";
+
+
     private NewsAdapter mAdapter;
     private static final int NEWS_LOADER_ID = 1;
     private TextView EmptyStateTextView;
@@ -69,19 +75,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
 
-        String orderBy = sharedPref.getString(getString(R.string.settings_order_by_key),
-                getString(R.string.settings_order_by_default));
+        String orderBy = sharedPref.getString(getString(R.string.date_list_key),
+                getString(R.string.date_list_default_value));
 
-//*https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test*//
+//*https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test
+// https://content.guardianapis.com/search?api-key=9089f21a-bc83-4c36-a079-dd9bdb460a49*//
 
-        Uri baseUri = Uri.parse(NEWS_URL);
-        Uri.Builder uribuilder = baseUri.buildUpon();
-        uribuilder.appendQueryParameter("show-fields", "section");
-        uribuilder.appendQueryParameter("byline", orderBy);
-        uribuilder.appendQueryParameter("api-key", "test");
+        Uri uri = Uri.parse(NEWS_URL);
+        Uri.Builder builder = uri.buildUpon();
+
+        builder.appendQueryParameter("orderby",orderBy);
+        builder.appendQueryParameter("api-key", API_KEY_VALUE);
 
 
-        return new NewsLoader(this, uribuilder.toString());
+
+        return new NewsLoader(this,builder.toString());
     }
 
     @Override

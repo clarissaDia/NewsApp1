@@ -1,5 +1,7 @@
 package com.example.android.newsapp1;
 
+import org.json.JSONObject;
+
 public class News {
 
     private String newsSection;

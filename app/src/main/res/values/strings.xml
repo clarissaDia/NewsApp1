@@ -6,13 +6,20 @@
 
     <string name="settings_title">News Settings</string>
     <string name="order_by_label">Order by</string>
-    
-    <string name="settings_order_by_key" translatable="false">order_by</string>
-    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_author_value</string>
 
-    <string name="settings_order_by_author_label">Author</string>
-    <string name="settings_order_by_author_value" translatable="false">author</string>
-    
-    <string name="settings_order_by_most_recent_label">Most recent</string>
-    <string name="settings_order_by_most_recent_value" translatable="false">time</string>
+    <string name="order_by_date_label">Order By Date</string>
+    <string name="date_list_key" translatable="false">order_by_date</string>
+    <string name="date_list_default_value" translatable="false">@string/date_list_2018_default_value</string>
+
+    <string name="date_list_2018_label">2018</string>
+    <string name="date_list_2018_default_value" translatable="false">2018-01-01</string>
+
+    <string name="date_list_2017_label">2017</string>
+    <string name="date_list_2017_default_value" translatable="false">2017-01-01</string>
+
+    <string name="date_list_2016_label">2016</string>
+    <string name="date_list_2016_default_value" translatable="false">2016-01-01</string>
+
+    <string name="date_list_2015_label">2015</string>
+    <string name="date_list_2015_default_value" translatable="false">2015-01-01</string>
 </resources>
