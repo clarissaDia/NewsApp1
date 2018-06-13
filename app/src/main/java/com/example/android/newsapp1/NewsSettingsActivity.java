@@ -27,8 +27,6 @@ public class NewsSettingsActivity extends AppCompatActivity {
            bindPreferenceSummaryToValue(orderBy);
         }
 
-
-
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();

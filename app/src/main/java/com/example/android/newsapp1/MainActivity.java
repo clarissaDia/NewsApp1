@@ -84,10 +84,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Uri uri = Uri.parse(NEWS_URL);
         Uri.Builder builder = uri.buildUpon();
 
-        builder.appendQueryParameter("orderby",orderBy);
+        builder.appendQueryParameter("from-date-to-date",orderBy);
         builder.appendQueryParameter("api-key", API_KEY_VALUE);
-
-
 
         return new NewsLoader(this,builder.toString());
     }
