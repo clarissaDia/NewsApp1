@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="date_labels_order_by">
         <item>@string/date_list_2018_label</item>
         <item>@string/date_list_2017_label</item>

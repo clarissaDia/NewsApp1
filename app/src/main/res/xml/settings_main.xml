@@ -2,13 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
 
-
     <ListPreference
-        android:title="@string/order_by_date_label"
+        android:defaultValue="@string/date_list_2018_default_value"
         android:entries="@array/date_labels_order_by"
         android:entryValues="@array/date_values_order_by"
-        android:defaultValue="@string/date_list_2018_default_value"
-        android:key="@string/date_list_key" />
-
+        android:key="@string/date_list_key"
+        android:title="@string/order_by_date_label" />
 
 </PreferenceScreen>

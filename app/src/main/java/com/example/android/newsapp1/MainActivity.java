@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,12 +25,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static final String LOG_TAG = MainActivity.class.getName();
     private static final String NEWS_URL = "https://content.guardianapis.com/search?show-fields=byline&section=books";
-    private static final String QUERY_SECTION_VALUE = "section=books";
-    private static final String QUERY_DATE_VALUE = "webPublicationDate";
-    private static final String QUERY_CONTRIBUTOR_VALUE ="byline";
     private static final String API_KEY_VALUE = "9089f21a-bc83-4c36-a079-dd9bdb460a49";
-
-
     private NewsAdapter mAdapter;
     private static final int NEWS_LOADER_ID = 1;
     private TextView EmptyStateTextView;
@@ -77,9 +71,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         String orderBy = sharedPref.getString(getString(R.string.date_list_key),
                 getString(R.string.date_list_default_value));
-
-//*https://content.guardianapis.com/search?show-fields=byline&section=books&api-key=test
-// https://content.guardianapis.com/search?api-key=9089f21a-bc83-4c36-a079-dd9bdb460a49*//
 
         Uri uri = Uri.parse(NEWS_URL);
         Uri.Builder builder = uri.buildUpon();
